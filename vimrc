@@ -1,11 +1,4 @@
 "==========================================
-" Author:  wklken
-" Version: 9.1
-" Email: wklken@yeah.net
-" BlogPost: http://www.wklken.me
-" ReadMe: README.md
-" Donation: http://www.wklken.me/pages/donation.html
-" Last_modify: 2015-12-15
 " Sections:
 "       -> Initial Plugin 加载插件
 "       -> General Settings 基础设置
@@ -47,7 +40,6 @@ filetype plugin indent on
 " General Settings 基础设置
 "==========================================
 
-
 " history存储容量
 set history=2000
 
@@ -65,30 +57,12 @@ set autoread
 " 启动的时候不显示那个援助乌干达儿童的提示
 set shortmess=atI
 
-" 备份,到另一个位置. 防止误删, 目前是取消备份
-"set backup
-"set backupext=.bak
-"set backupdir=/tmp/vimbk/
-
-" 取消备份。 视情况自己改
+" 取消备份, 视情况自己改
 set nobackup
 " 关闭交换文件
 set noswapfile
 
-
-" TODO: remove this, use gundo
-" create undo file
-" if has('persistent_undo')
-  " " How many undos
-  " set undolevels=1000
-  " " number of lines to save for undo
-  " set undoreload=10000
-  " " So is persistent undo ...
-  " "set undofile
-  " set noundofile
-  " " set undodir=/tmp/vimundo/
-" endif
-
+" 忽略的文件格式
 set wildignore=*.swp,*.bak,*.pyc,*.class,.svn
 
 " 突出显示当前列
@@ -96,11 +70,9 @@ set cursorcolumn
 " 突出显示当前行
 set cursorline
 
-
 " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制, 不需要可以去掉
 " 好处：误删什么的，如果以前屏幕打开，可以找回
 set t_ti= t_te=
-
 
 " 鼠标暂不启用, 键盘党....
 " set mouse-=a
@@ -109,13 +81,13 @@ set mouse=a
 " Hide the mouse cursor while typing
 " set mousehide
 
-
 " 修复ctrl+m 多光标操作选择的bug，但是改变了ctrl+v进行字符选中时将包含光标下的字符
 set selection=inclusive
 set selectmode=mouse,key
 
 " change the terminal's title
 set title
+
 " 去掉输入错误的提示声音
 set novisualbell
 set noerrorbells
@@ -288,8 +260,6 @@ set completeopt=longest,menu
 
 " 增强模式中的命令行自动完成操作
 set wildmenu
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc,*.class
 
 " 离开插入模式后自动关闭预览窗口
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -382,14 +352,11 @@ function! XTermPasteBegin()
 endfunction
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
-
-
 " 分屏窗口移动, Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
 
 " http://stackoverflow.com/questions/13194428/is-better-way-to-zoom-windows-in-vim-than-zoomwin
 " Zoom / Restore window.
@@ -407,22 +374,18 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <Leader>z :ZoomToggle<CR>
 
-
 " Go to home and end using capitalized directions
 noremap H ^
 noremap L $
 
-
 " Map ; to : and save a million keystrokes 用于快速进入命令行
 nnoremap ; :
-
 
 " 命令行模式增强，ctrl - a到行首， -e 到行尾
 cnoremap <C-j> <t_kd>
 cnoremap <C-k> <t_ku>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-
 
 " 搜索相关
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
@@ -539,11 +502,6 @@ nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 
 
-" Jump to start and end of line using the home row keys
-" 增强tab操作, 导致这个会有问题, 考虑换键
-"nmap t o<ESC>k
-"nmap T O<ESC>j
-
 " Quickly close the current window
 nnoremap <leader>q :q<CR>
 
@@ -579,8 +537,6 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript tabstop=2
 " disable showmatch when use > in php
 au BufWinEnter *.php set mps-=<:>
 
-
-
 " 保存python文件时删除多余空格
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -589,7 +545,6 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
-
 
 " 定义函数AutoSetFileHead，自动插入文件头
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
@@ -611,7 +566,6 @@ function! AutoSetFileHead()
     normal o
 endfunc
 
-
 " 设置可以高亮的关键字
 if has("autocmd")
   " Highlight TODO, FIXME, NOTE, etc.
@@ -628,7 +582,6 @@ endif
 " beta
 " https://dougblack.io/words/a-good-vimrc.html
 set lazyredraw          " redraw only when we need to.
-
 
 "==========================================
 " Theme Settings  主题设置
@@ -651,15 +604,15 @@ if has("gui_running")
     set t_Co=256
 endif
 
-
-
+" 开启24bit的颜色
+set termguicolors
 " theme主题
 set background=dark
 set t_Co=256
 
 " colorscheme solarized
-colorscheme molokai
-
+" colorscheme molokai
+colorscheme one
 
 " 设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
